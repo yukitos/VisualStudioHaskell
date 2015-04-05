@@ -153,8 +153,12 @@
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <VSTemplate Include="Templates\Projects\HaskellProject\HaskellProject.vstemplate" />
-    <None Include="Templates\Projects\HaskellProject\HaskellProject.ico" />
+    <Content Include="Templates\Projects\HaskellProject\HaskellProject.vstemplate">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Templates\Projects\HaskellProject\HaskellProject.ico">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Templates\VisualStudioHaskell.vsdir">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -198,8 +202,12 @@
     <None Include="source.extension.vsixmanifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Templates\Projects\HaskellProject\Main.hs" />
-    <None Include="Templates\Projects\HaskellProject\test.cabal" />
+    <Content Include="Templates\Projects\HaskellProject\Main.hs">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
+    <Content Include="Templates\Projects\HaskellProject\test.cabal">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Key.snk" />
