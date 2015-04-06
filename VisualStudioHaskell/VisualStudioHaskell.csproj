@@ -134,19 +134,19 @@
       <DependentUpon>MyControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MyToolWindow.cs" />
-    <Compile Include="EditorFactory.cs" />
-    <Compile Include="EditorPane.cs" />
-    <Compile Include="EditorTextBox.cs">
+    <Compile Include="Editor\EditorFactory.cs" />
+    <Compile Include="Editor\EditorPane.cs" />
+    <Compile Include="Editor\EditorTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="EditorTextBox.designer.cs">
+    <Compile Include="Editor\EditorTextBox.designer.cs">
       <DependentUpon>EditorTextBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="IEditor.cs" />
-    <Compile Include="MyEditor.cs">
+    <Compile Include="Editor\IEditor.cs" />
+    <Compile Include="Editor\MyEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="MyEditor.designer.cs">
+    <Compile Include="Editor\MyEditor.designer.cs">
       <DependentUpon>MyEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="NativeMethods.cs" />
@@ -179,15 +179,15 @@
     <Compile Include="PkgCmdID.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="EditorPane.resx">
+    <EmbeddedResource Include="Editor\EditorPane.resx">
       <DependentUpon>EditorPane.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorTextBox.resx">
+    <EmbeddedResource Include="Editor\EditorTextBox.resx">
       <DependentUpon>EditorTextBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyEditor.resx">
+    <EmbeddedResource Include="Editor\MyEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MyEditor.cs</DependentUpon>
     </EmbeddedResource>
