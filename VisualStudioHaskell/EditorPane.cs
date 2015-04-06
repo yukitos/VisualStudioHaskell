@@ -1431,26 +1431,7 @@ namespace Company.VisualStudioHaskell
                 }
 
                 // Load the file
-                StreamReader str = new StreamReader(pszFilename);
-                string rtfSignature = "{\\rtf";
-                string lineRead = null;
-                try
-                {
-                    lineRead = str.ReadLine();
-                }
-                finally
-                {
-                    str.Close();
-                }
-                if (lineRead != null && lineRead.Contains(rtfSignature))
-                {
-                    //try loading with Rich Text initially
-                    editorControl.RichTextBoxControl.LoadFile(pszFilename, RichTextBoxStreamType.RichText);
-                }
-                else
-                {
-                    editorControl.RichTextBoxControl.LoadFile(pszFilename, RichTextBoxStreamType.PlainText);
-                }
+                editorControl.RichTextBoxControl.LoadFile(pszFilename, RichTextBoxStreamType.PlainText);
 
                 isDirty = false;
 
