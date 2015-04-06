@@ -253,7 +253,7 @@
       debugging, editing a file or when the user is using a specific designer. -->
   <VisibilityConstraints>
 
-    <VisibilityItem guid="guidVisualStudioHaskellCmdSet" id="IDM_TLB_RTF" context="guidVisualStudioHaskellEditorFactory" />
+    <!--<VisibilityItem guid="guidVisualStudioHaskellCmdSet" id="IDM_TLB_RTF" context="guidVisualStudioHaskellEditorFactory" />-->
   </VisibilityConstraints>
 
   <KeyBindings>
