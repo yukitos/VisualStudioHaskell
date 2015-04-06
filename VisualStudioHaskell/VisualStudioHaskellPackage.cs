@@ -45,15 +45,20 @@ namespace Company.VisualStudioHaskell
     [ProvideProjectFactory(
         typeof(ProjectFactory),
         "Haskell Project",
-        "Haskell Project Files (*.cabal);*.cabal",
-        "cabal",
-        "cabal",
+        "Haskell Project Files (*.hsproj);*.hsproj",
+        "hsproj",
+        "hsproj",
         "Templates\\Projects\\HaskellProject",
         LanguageVsTemplate = "HaskellProject")]
 
     [Guid(GuidList.guidVisualStudioHaskellPkgString)]
-    public sealed class VisualStudioHaskellPackage : Package
+    public sealed class VisualStudioHaskellPackage : Microsoft.VisualStudio.Project.ProjectPackage
     {
+        public override string ProductUserContext
+        {
+            get { return ""; }
+        }
+
         /// <summary>
         /// Default constructor of the package.
         /// Inside this method you can place any initialization code that does not require 
@@ -98,6 +103,8 @@ namespace Company.VisualStudioHaskell
         {
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
+
+            this.RegisterProjectFactory(new ProjectFactory(this));
 
             //Create Editor Factory. Note that the base Package class will call Dispose on it.
             base.RegisterEditorFactory(new EditorFactory(this));

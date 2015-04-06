@@ -13,7 +13,7 @@
     <ProvideDefaultName>true</ProvideDefaultName>
   </TemplateData>
   <TemplateContent>
-    <Project File="test.cabal" ReplaceParameters="true">
+    <Project File="test.hsproj" ReplaceParameters="true">
       <ProjectItem ReplaceParameters="true" OpenInEditor="true">Main.hs</ProjectItem>
     </Project>
   </TemplateContent>

@@ -5,28 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+using Microsoft.VisualStudio.Shell;
 
-namespace Company.VisualStudioHaskell {
+using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
+
+namespace Company.VisualStudioHaskell
+{
     [Guid(GuidList.guidVisualStudioHaskellProjectFactoryString)]
-    class ProjectFactory : IVsProjectFactory {
-        public ProjectFactory() {
+    class ProjectFactory : Microsoft.VisualStudio.Project.ProjectFactory
+    {
+        private VisualStudioHaskellPackage package;
+
+        public ProjectFactory(VisualStudioHaskellPackage package)
+            : base(package)
+        {
             Console.WriteLine("TestTestTest!");
+            this.package = package;
         }
-
-        public int CanCreateProject(string pszFilename, uint grfCreateFlags, out int pfCanCreate) {
-            throw new NotImplementedException();
-        }
-
-        public int Close() {
-            throw new NotImplementedException();
-        }
-
-        public int CreateProject(string pszFilename, string pszLocation, string pszName, uint grfCreateFlags, ref Guid iidProject, out IntPtr ppvProject, out int pfCanceled) {
-            throw new NotImplementedException();
-        }
-
-        public int SetSite(Microsoft.VisualStudio.OLE.Interop.IServiceProvider psp) {
-            throw new NotImplementedException();
+        protected override Microsoft.VisualStudio.Project.ProjectNode CreateProject()
+        {
+            var project = new ProjectNode(this.package);
+            project.SetSite((IOleServiceProvider)((IServiceProvider)this.package).GetService(typeof(IOleServiceProvider)));
+            return project;
         }
     }
 }

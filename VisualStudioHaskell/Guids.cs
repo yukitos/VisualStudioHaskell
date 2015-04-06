@@ -14,5 +14,6 @@ namespace Company.VisualStudioHaskell
 
         public static readonly Guid guidVisualStudioHaskellCmdSet = new Guid(guidVisualStudioHaskellCmdSetString);
         public static readonly Guid guidVisualStudioHaskellEditorFactory = new Guid(guidVisualStudioHaskellEditorFactoryString);
+        public static readonly Guid guidVisualStudioHaskellProjectFactory = new Guid(guidVisualStudioHaskellProjectFactoryString);
     };
 }
