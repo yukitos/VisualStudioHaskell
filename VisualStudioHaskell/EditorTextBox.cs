@@ -54,7 +54,7 @@ namespace Company.VisualStudioHaskell
 
         private void SetCursor(bool cursorNo)
         {
-            Cursor = cursorNo ? Cursors.No : Cursors.Default;
+            Cursor = cursorNo ? Cursors.No : Cursors.IBeam;
         }
     }
 }
