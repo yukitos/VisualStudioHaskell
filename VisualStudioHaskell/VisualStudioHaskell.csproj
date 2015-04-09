@@ -42,6 +42,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualStudio.ComponentModelHost, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.Editor, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
     <Reference Include="Microsoft.VisualStudio.Project">
       <HintPath>..\Microsoft.VisualStudio.Project.dll</HintPath>
@@ -61,6 +63,7 @@
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.10.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.11.0" />
     <Reference Include="Microsoft.VisualStudio.Shell.Immutable.12.0" />
+    <Reference Include="Microsoft.VisualStudio.TextManager.Interop.8.0, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -130,6 +133,9 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants.cs" />
+    <Compile Include="Editor\LanguagePreferences.cs" />
+    <Compile Include="LanguageInfo.cs" />
     <Compile Include="MyControl.xaml.cs">
       <DependentUpon>MyControl.xaml</DependentUpon>
     </Compile>
@@ -143,15 +149,18 @@
       <DependentUpon>EditorTextBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Editor\IEditor.cs" />
-    <Compile Include="Editor\MyEditor.cs">
+    <Compile Include="MyEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Editor\MyEditor.designer.cs">
+    <Compile Include="MyEditor.designer.cs">
       <DependentUpon>MyEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Options\IOptionsService.cs" />
+    <Compile Include="Options\OptionsService.cs" />
     <Compile Include="ProjectFactory.cs" />
     <Compile Include="ProjectNode.cs" />
+    <Compile Include="Service.cs" />
     <Compile Include="VSMacroRecorder.cs" />
     <Content Include="Templates\Main.hs">
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -187,7 +196,7 @@
       <DependentUpon>EditorTextBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Editor\MyEditor.resx">
+    <EmbeddedResource Include="MyEditor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MyEditor.cs</DependentUpon>
     </EmbeddedResource>

@@ -22,7 +22,7 @@ namespace Company.VisualStudioHaskell
             m_Recorder = new VSMacroRecorder(GuidList.guidVisualStudioHaskellEditorFactory);
         }
 
-        public EditorTextBox RichTextBoxControl
+        public Editor.EditorTextBox RichTextBoxControl
         {
             get { return this.richTextBoxCtrl; }
         }

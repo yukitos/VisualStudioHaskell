@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBoxCtrl = new Company.VisualStudioHaskell.EditorTextBox();
+            this.richTextBoxCtrl = new Company.VisualStudioHaskell.Editor.EditorTextBox();
             this.SuspendLayout();
             // 
             // richTextBoxCtrl
@@ -56,7 +56,7 @@
 
         #endregion
 
-        private EditorTextBox richTextBoxCtrl;
+        private Editor.EditorTextBox richTextBoxCtrl;
 
 
     }

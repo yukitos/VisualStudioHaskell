@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Shell;
 
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
-namespace Company.VisualStudioHaskell
+namespace Company.VisualStudioHaskell.Editor
 {
     /// <summary>
     /// Factory for creating our editor object. Extends from the IVsEditoryFactory interface

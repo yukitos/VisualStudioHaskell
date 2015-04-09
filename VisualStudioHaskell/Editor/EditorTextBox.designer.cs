@@ -1,5 +1,5 @@
 ﻿
-namespace Company.VisualStudioHaskell
+namespace Company.VisualStudioHaskell.Editor
 {
     partial class EditorTextBox
     {

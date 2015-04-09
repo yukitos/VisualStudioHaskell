@@ -3,7 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.Security.Permissions;
 
-namespace Company.VisualStudioHaskell
+namespace Company.VisualStudioHaskell.Editor
 {
     public partial class EditorTextBox : RichTextBox
     {

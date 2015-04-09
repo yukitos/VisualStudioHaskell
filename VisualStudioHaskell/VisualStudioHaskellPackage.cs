@@ -8,9 +8,13 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Settings;
+using Microsoft.VisualStudio.Settings;
 
 namespace Company.VisualStudioHaskell
 {
+    using Editor;
+
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
     ///
@@ -42,6 +46,9 @@ namespace Company.VisualStudioHaskell
     // used to navigate to find results from a "Find in Files" type of operation.
     [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.TextView_string)]
 
+    [ProvideLanguageService(typeof(LanguageInfo), Constants.LanguageName, 106, RequestStockColors = true, ShowSmartIndent = true, ShowCompletion = true, DefaultToInsertSpaces = true, HideAdvancedMembersByDefault = true, EnableAdvancedMembersOption = true, ShowDropDownOptions = true)]
+    [ProvideLanguageExtension(typeof(LanguageInfo), Constants.FileExtension)]
+
     [ProvideProjectFactory(
         typeof(ProjectFactory),
         "Haskell Project",
@@ -54,6 +61,8 @@ namespace Company.VisualStudioHaskell
     [Guid(GuidList.guidVisualStudioHaskellPkgString)]
     public sealed class VisualStudioHaskellPackage : Microsoft.VisualStudio.Project.ProjectPackage
     {
+        internal Service _hsService;
+
         public override string ProductUserContext
         {
             get { return ""; }
@@ -104,6 +113,16 @@ namespace Company.VisualStudioHaskell
             Debug.WriteLine (string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", this.ToString()));
             base.Initialize();
 
+            var services = (IServiceContainer)this;
+
+            var optionsService = new Options.OptionsService(this);
+
+            services.AddService(typeof(Options.IOptionsService), optionsService, promote: true);
+
+            var hsService = _hsService = new Service(services);
+
+            services.AddService(typeof(Service), hsService, promote: true);
+
             this.RegisterProjectFactory(new ProjectFactory(this));
 
             //Create Editor Factory. Note that the base Package class will call Dispose on it.
@@ -124,6 +143,12 @@ namespace Company.VisualStudioHaskell
             }
         }
         #endregion
+
+        internal static SettingsManager GetSettings(System.IServiceProvider serviceProvider)
+        {
+            return new ShellSettingsManager(serviceProvider);
+            //return SettingsManagerCreator.GetSettingsManager(serviceProvider);
+        }
 
         /// <summary>
         /// This function is the callback used to execute a command when the a menu item is clicked.

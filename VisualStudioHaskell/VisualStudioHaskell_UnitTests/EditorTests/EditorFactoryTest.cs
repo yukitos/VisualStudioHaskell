@@ -16,6 +16,7 @@ using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.VsSDK.UnitTestLibrary;
 using Company.VisualStudioHaskell;
+using Company.VisualStudioHaskell.Editor;
 
 namespace VisualStudioHaskell_UnitTests.EditorTests {
     [TestClass()]

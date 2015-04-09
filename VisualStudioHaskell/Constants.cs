@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Company.VisualStudioHaskell
 {
-    class LanguagePreferences
+    public static class Constants
     {
+        public const string LanguageName = "Haskell";
+
+        internal const string FileExtension = ".hs";
     }
 }

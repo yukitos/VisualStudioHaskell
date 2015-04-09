@@ -8,11 +8,11 @@ namespace Company.VisualStudioHaskell
 {
     class ProjectNode : Microsoft.VisualStudio.Project.ProjectNode
     {
-        private VisualStudioHaskellPackage package;
+        private VisualStudioHaskellPackage _package;
 
         public ProjectNode(VisualStudioHaskellPackage package)
         {
-            this.package = package;
+            _package = package;
         }
         public override Guid ProjectGuid
         {
