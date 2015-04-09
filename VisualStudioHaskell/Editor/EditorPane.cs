@@ -224,6 +224,21 @@ namespace Company.VisualStudioHaskell.Editor
 
             // Call the helper function that will do all of the command setup work
             setupCommands();
+
+            // Set font
+            var vsEnvironment = (DTE)Package.GetGlobalService(typeof(SDTE));
+            var storage = Package.GetGlobalService(typeof(SVsFontAndColorStorage)) as IVsFontAndColorStorage;
+            if (storage != null)
+            {
+                var categoryGuid = new Guid(FontsAndColorsCategory.TextEditor);
+                FontInfo[] fontInfo = new FontInfo[1];
+
+                storage.OpenCategory(ref categoryGuid, (uint)__FCSTORAGEFLAGS.FCSF_READONLY);
+                storage.GetFont(null, fontInfo);
+                storage.CloseCategory();
+
+                editorControl.RichTextBoxControl.Font = new Font(fontInfo[0].bstrFaceName, fontInfo[0].wPointSize);
+            }
         }
 
         /// <summary>
@@ -420,7 +435,7 @@ namespace Company.VisualStudioHaskell.Editor
                                 new EventHandler(onUndo), new EventHandler(onQueryUndo));
                 addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.Redo,
                                 new EventHandler(onRedo), new EventHandler(onQueryRedo));
-                addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.Bold,
+                /*addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.Bold,
                                 new EventHandler(onBold), new EventHandler(onQueryBold));
                 addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.Italic,
                                 new EventHandler(onItalic), new EventHandler(onQueryItalic));
@@ -441,7 +456,7 @@ namespace Company.VisualStudioHaskell.Editor
                 addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.FontSizeGetList,
                                 new EventHandler(onFontSizeGetList), null);
                 addCommand(mcs, VSConstants.GUID_VSStandardCommandSet97, (int)VSConstants.VSStd97CmdID.FontSize,
-                                new EventHandler(onFontSize), null);
+                                new EventHandler(onFontSize), null);*/
                 addCommand(mcs, VSConstants.VSStd2K, (int)VSConstants.VSStd2KCmdID.BULLETEDLIST,
                                 new EventHandler(onBulletedList), new EventHandler(onQueryBulletedList));
                 // Support clipboard rings
