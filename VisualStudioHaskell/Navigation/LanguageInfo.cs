@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.Editor;
 using Microsoft.VisualStudio.TextManager.Interop;
 using Microsoft.VisualStudio.ComponentModelHost;
 
-namespace Company.VisualStudioHaskell
+namespace Company.VisualStudioHaskell.Navigation
 {
     [Guid(GuidList.guidVisualStudioHaskellLanguageServiceString)]
     class LanguageInfo : IVsLanguageInfo
@@ -31,9 +31,9 @@ namespace Company.VisualStudioHaskell
             IVsTextView textView;
             if (ErrorHandler.Succeeded(pCodeWin.GetPrimaryView(out textView)))
             {
-                /*ppCodeWinMgr = new CodeWindowManager(_serviceProvider, pCodeWin, service.GetWpfTextView(textView));
+                ppCodeWinMgr = new Navigation.CodeWindowManager();//_serviceProvider, pCodeWin, service.GetWpfTextView(textView));
 
-                return VSConstants.S_OK;*/
+                return VSConstants.S_OK;
             }
 
             ppCodeWinMgr = null;

@@ -13,10 +13,10 @@ namespace Company.VisualStudioHaskell
 {
     internal class ProjectResources
     {
-        public const string ReservedWordClassificationType = "ReservedWordClassificationType";
+        public const string IdentifierClassificationType = "IdentifierClassificationType";
 
         private static readonly Lazy<ResourceManager> _manager = new Lazy<ResourceManager>(
-            () => new ResourceManager("Microsoft.VisualStudio.Project", typeof(ProjectResources).Assembly),
+            () => new ResourceManager("Company.VisualStudioHaskell.Resources", typeof(ProjectResources).Assembly),
             LazyThreadSafetyMode.ExecutionAndPublication
         );
 
@@ -28,7 +28,7 @@ namespace Company.VisualStudioHaskell
             }
         }
 
-        private static string GetStringInternal(string value, object[] args)
+        private static string GetStringInternal(string value, params object[] args)
         {
             string result = Manager.GetString(value, CultureInfo.CurrentUICulture);
 
@@ -46,7 +46,7 @@ namespace Company.VisualStudioHaskell
             return string.Format(CultureInfo.CurrentUICulture, result, args);
         }
 
-        public static string GetString(string value, object[] args)
+        public static string GetString(string value, params object[] args)
         {
             var result = GetStringInternal(value, args);
             Debug.Assert(result != null);

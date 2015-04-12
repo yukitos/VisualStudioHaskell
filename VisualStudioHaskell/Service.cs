@@ -10,6 +10,8 @@ using Microsoft.VisualStudio.OLE.Interop;
 
 namespace Company.VisualStudioHaskell
 {
+    using Navigation;
+
     class Service
     {
         private readonly IServiceContainer _container;

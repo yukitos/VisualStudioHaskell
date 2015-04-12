@@ -70,11 +70,11 @@ namespace Company.VisualStudioHaskell {
         }
         
         /// <summary>
-        ///   Haskell Reserved Word に類似しているローカライズされた文字列を検索します。
+        ///   Haskell Identifier に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string ReservedWordClassificationType {
+        internal static string IdentifierClassificationType {
             get {
-                return ResourceManager.GetString("ReservedWordClassificationType", resourceCulture);
+                return ResourceManager.GetString("IdentifierClassificationType", resourceCulture);
             }
         }
         

@@ -11,9 +11,13 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Settings;
 using Microsoft.VisualStudio.Settings;
 
+using Microsoft.VisualStudio.ComponentModelHost;
+using Microsoft.VisualStudio.Utilities;
+
 namespace Company.VisualStudioHaskell
 {
     using Editor;
+    using Navigation;
 
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -45,6 +49,7 @@ namespace Company.VisualStudioHaskell
     // This attribute declares that your EditorPane class implements IVsCodeWindow interface
     // used to navigate to find results from a "Find in Files" type of operation.
     [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.TextView_string)]
+    [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.Code_string)]
 
     [ProvideLanguageService(typeof(LanguageInfo), Constants.LanguageName, 106, RequestStockColors = true, ShowSmartIndent = true, ShowCompletion = true, DefaultToInsertSpaces = true, HideAdvancedMembersByDefault = true, EnableAdvancedMembersOption = true, ShowDropDownOptions = true)]
     [ProvideLanguageExtension(typeof(LanguageInfo), Constants.FileExtension)]
@@ -115,6 +120,8 @@ namespace Company.VisualStudioHaskell
 
             var services = (IServiceContainer)this;
 
+            ;
+
             var optionsService = new Options.OptionsService(this);
 
             services.AddService(typeof(Options.IOptionsService), optionsService, promote: true);
@@ -140,6 +147,11 @@ namespace Company.VisualStudioHaskell
                 CommandID toolwndCommandID = new CommandID(GuidList.guidVisualStudioHaskellCmdSet, (int)PkgCmdIDList.cmdidMyTool);
                 MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
                 mcs.AddCommand( menuToolWin );
+            }
+
+            foreach (var c in ((IComponentModel)Package.GetGlobalService(typeof(SComponentModel))).GetService<IContentTypeRegistryService>().ContentTypes)
+            {
+                Trace.WriteLine(c.DisplayName);
             }
         }
         #endregion
