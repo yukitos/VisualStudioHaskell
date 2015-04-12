@@ -13,10 +13,10 @@ namespace Company.VisualStudioHaskell
         public const string ContentType = "Haskell";
         // public const string BaseRegistryKey = "";
 
-        /*[Export, Name(ContentType), BaseDefinition("code")]
+        [Export, Name(ContentType), BaseDefinition("code")]
         internal static ContentTypeDefinition ContentTypeDefinition = null;
 
         [Export, FileExtension(Constants.FileExtension), ContentType(ContentType)]
-        internal static FileExtensionToContentTypeDefinition FileExtensionToContentTypeDefinition = null;*/
+        internal static FileExtensionToContentTypeDefinition FileExtensionToContentTypeDefinition = null;
     }
 }

@@ -145,7 +145,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="CoreConstants.cs" />
     <Compile Include="Editor\LanguagePreferences.cs" />
-    <Compile Include="FileAndContentTypeDefinitions.cs" />
     <Compile Include="HaskellPredefinedClassificationTypeName.cs" />
     <Compile Include="Navigation\LanguageInfo.cs" />
     <Compile Include="MyControl.xaml.cs">
