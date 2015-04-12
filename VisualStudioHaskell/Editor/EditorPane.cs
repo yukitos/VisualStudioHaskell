@@ -226,7 +226,6 @@ namespace Company.VisualStudioHaskell.Editor
             setupCommands();
 
             // Set font
-            var vsEnvironment = (DTE)Package.GetGlobalService(typeof(SDTE));
             var storage = Package.GetGlobalService(typeof(SVsFontAndColorStorage)) as IVsFontAndColorStorage;
             if (storage != null)
             {
