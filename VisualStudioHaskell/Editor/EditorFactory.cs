@@ -6,39 +6,38 @@ using System.Security.Permissions;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.TextManager.Interop;
+using Microsoft.VisualStudio.Designer.Interfaces;
+using Microsoft.VisualStudio.OLE.Interop;
 
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace Company.VisualStudioHaskell.Editor
 {
+    using Navigation;
+
     /// <summary>
     /// Factory for creating our editor object. Extends from the IVsEditoryFactory interface
     /// </summary>
     [Guid(GuidList.guidVisualStudioHaskellEditorFactoryString)]
-    public sealed class EditorFactory : IVsEditorFactory, IDisposable
+    public sealed class EditorFactory : IVsEditorFactory
     {
-        private VisualStudioHaskellPackage editorPackage;
-        private ServiceProvider vsServiceProvider;
+        private VisualStudioHaskellPackage _package;
+        private ServiceProvider _vsServiceProvider;
+        private bool _promptEncoding;
 
+        public EditorFactory(VisualStudioHaskellPackage package, bool promptEncoding)
+        {
+            Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering {0} constructor", this.ToString()));
 
+            _package = package;
+            _promptEncoding = promptEncoding;
+        }
         public EditorFactory(VisualStudioHaskellPackage package)
         {
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering {0} constructor", this.ToString()));
 
-            this.editorPackage = package;
-        }
-
-        /// <summary>
-        /// Since we create a ServiceProvider which implements IDisposable we
-        /// also need to implement IDisposable to make sure that the ServiceProvider's
-        /// Dispose method gets called.
-        /// </summary>
-        public void Dispose()
-        {
-            if (vsServiceProvider != null)
-            {
-                vsServiceProvider.Dispose();
-            }
+            _package = package;
         }
 
         #region IVsEditorFactory Members
@@ -51,13 +50,13 @@ namespace Company.VisualStudioHaskell.Editor
         /// <returns></returns>
         public int SetSite(Microsoft.VisualStudio.OLE.Interop.IServiceProvider psp)
         {
-            vsServiceProvider = new ServiceProvider(psp);
+            _vsServiceProvider = new ServiceProvider(psp);
             return VSConstants.S_OK;
         }
 
         public object GetService(Type serviceType)
         {
-            return vsServiceProvider.GetService(serviceType);
+            return _vsServiceProvider.GetService(serviceType);
         }
 
         // This method is called by the Environment (inside IVsUIShellOpenDocument::
@@ -94,11 +93,9 @@ namespace Company.VisualStudioHaskell.Editor
             pbstrPhysicalView = null;    // initialize out parameter
 
             // we support only a single physical view
-            if (VSConstants.LOGVIEWID_Primary == rguidLogicalView)
-            {
-                return VSConstants.S_OK;        // primary view uses NULL as pbstrPhysicalView
-            }
-            else if (VSConstants.LOGVIEWID.TextView_guid == rguidLogicalView)
+            if (VSConstants.LOGVIEWID_Primary == rguidLogicalView ||
+                VSConstants.LOGVIEWID_Code == rguidLogicalView ||
+                VSConstants.LOGVIEWID_TextView == rguidLogicalView)
             {
                 // Our editor supports FindInFiles, therefore we need to declare support for LOGVIEWID_TextView.
                 // In addition our EditorPane implements IVsCodeWindow and we also provide the 
@@ -106,7 +103,11 @@ namespace Company.VisualStudioHaskell.Editor
                 // attribute on our Package class:
                 // [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.TextView_string)]
 
-                pbstrPhysicalView = null; // our primary view implements IVsCodeWindow
+                return VSConstants.S_OK;        // primary view uses NULL as pbstrPhysicalView
+            }
+            else if (VSConstants.LOGVIEWID.Designer_guid == rguidLogicalView)
+            {
+                pbstrPhysicalView = "Design";
                 return VSConstants.S_OK;
             }
             else
@@ -150,7 +151,7 @@ namespace Company.VisualStudioHaskell.Editor
         /// </param>
         /// <param name="pgrfCDW">Flags for CreateDocumentWindow</param>
         /// <returns></returns>
-        [SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
+        //[SecurityPermission(SecurityAction.Demand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public int CreateEditorInstance(
                         uint grfCreateDoc,
                         string pszMkDocument,
@@ -169,7 +170,7 @@ namespace Company.VisualStudioHaskell.Editor
             // Initialize to null
             ppunkDocView = IntPtr.Zero;
             ppunkDocData = IntPtr.Zero;
-            pguidCmdUI = GuidList.guidVisualStudioHaskellEditorFactory;
+            pguidCmdUI = Guid.Empty;
             pgrfCDW = 0;
             pbstrEditorCaption = null;
 
@@ -183,14 +184,148 @@ namespace Company.VisualStudioHaskell.Editor
                 return VSConstants.VS_E_INCOMPATIBLEDOCDATA;
             }
 
-            // Create the Document (editor)
-            EditorPane NewEditor = new EditorPane(editorPackage);
-            ppunkDocView = Marshal.GetIUnknownForObject(NewEditor);
-            ppunkDocData = Marshal.GetIUnknownForObject(NewEditor);
-            pbstrEditorCaption = "";
+            IVsTextLines lines;
+
+            if (punkDocDataExisting == IntPtr.Zero)
+            {
+                Guid clsid = typeof(VsTextBufferClass).GUID;
+                Guid iid = typeof(IVsTextLines).GUID;
+                lines = _package.CreateInstance(ref clsid, ref iid, typeof(IVsTextLines)) as IVsTextLines;
+                ((IObjectWithSite)lines).SetSite(_vsServiceProvider.GetService(typeof(IOleServiceProvider)));
+            }
+            else
+            {
+                lines = Marshal.GetObjectForIUnknown(punkDocDataExisting) as IVsTextLines;
+                if (lines == null)
+                {
+                    var provider = lines as IVsTextBufferProvider;
+                    if (provider != null)
+                    {
+                        provider.GetTextBuffer(out lines);
+                    }
+                }
+                if (lines == null)
+                {
+                    ErrorHandler.ThrowOnFailure(VSConstants.VS_E_INCOMPATIBLEDOCDATA);
+                }
+            }
+
+            if (punkDocDataExisting != IntPtr.Zero)
+            {
+                ppunkDocData = punkDocDataExisting;
+                Marshal.AddRef(punkDocDataExisting);
+            }
+            else
+            {
+                ppunkDocData = Marshal.GetIUnknownForObject(lines);
+            }
+
+            try
+            {
+                pbstrEditorCaption = string.Empty;
+                pguidCmdUI = Guid.Empty;
+
+                if (string.IsNullOrEmpty(pszPhysicalView))
+                {
+                    ppunkDocView = CreateCodeView(pszMkDocument, lines, ref pbstrEditorCaption, ref pguidCmdUI);
+                }
+                else if (string.Compare(pszPhysicalView, "design", true, CultureInfo.InvariantCulture) == 0)
+                {
+                    ppunkDocView = CreateFormView(pvHier, itemid, lines, ref pbstrEditorCaption, ref pguidCmdUI);
+                }
+                else
+                {
+                    ErrorHandler.ThrowOnFailure(VSConstants.VS_E_UNSUPPORTEDFORMAT);
+                }
+            }
+            finally
+            {
+                if (ppunkDocView == IntPtr.Zero)
+                {
+                    if (punkDocDataExisting != ppunkDocData && ppunkDocData != IntPtr.Zero)
+                    {
+                        Marshal.Release(ppunkDocData);
+                        ppunkDocData = IntPtr.Zero;
+                    }
+                }
+            }
+
             return VSConstants.S_OK;
         }
 
         #endregion
+
+        private System.IntPtr CreateFormView(IVsHierarchy hierarchy, uint itemId, IVsTextLines lines, ref string caption, ref Guid cmdUI)
+        {
+            var service = (IVSMDDesignerService)GetService(typeof(IVSMDDesignerService));
+            var loader = (IVSMDDesignerLoader)service.CreateDesignerLoader("Microsoft.VisualStudio.Designer.Serialization.VSDesignerLoader");
+
+            bool initialized = false;
+
+            try
+            {
+                var provider = _vsServiceProvider.GetService(typeof(IOleServiceProvider)) as IOleServiceProvider;
+                loader.Initialize(provider, hierarchy, (int)itemId, lines);
+                initialized = true;
+
+                var designer = service.CreateDesigner(provider, loader);
+
+                caption = loader.GetEditorCaption((int)READONLYSTATUS.ROSTATUS_Unknown);
+                cmdUI = designer.CommandGuid;
+
+                return Marshal.GetIUnknownForObject(designer.View);
+            }
+            catch
+            {
+                if (initialized)
+                {
+                    loader.Dispose();
+                }
+                throw;
+            }
+        }
+
+        private System.IntPtr CreateCodeView(string docMoniker, IVsTextLines lines, ref string caption, ref Guid cmdUI)
+        {
+            Type codeWindowType = typeof(IVsCodeWindow);
+            Guid iid = codeWindowType.GUID;
+            Guid clsid = typeof(VsCodeWindowClass).GUID;
+            var window = (IVsCodeWindow)_package.CreateInstance(ref clsid, ref iid, codeWindowType);
+
+            ErrorHandler.ThrowOnFailure(window.SetBuffer(lines));
+            ErrorHandler.ThrowOnFailure(window.SetBaseEditorCaption(null));
+            ErrorHandler.ThrowOnFailure(window.GetEditorCaption(READONLYSTATUS.ROSTATUS_Unknown, out caption));
+
+            var data = lines as IVsUserData;
+            if (data != null)
+            {
+                if (_promptEncoding)
+                {
+                    var guid = VSConstants.VsTextBufferUserDataGuid.VsBufferEncodingPromptOnLoad_guid;
+                    data.SetData(ref guid, (uint)1);
+                }
+
+                Guid vsCoreGuid = new Guid("{8239bec4-ee87-11d0-8c98-00c04fc2ab22}");
+                Guid langGuid = typeof(LanguageInfo).GUID;
+                Guid curGuid;
+
+                lines.GetLanguageServiceID(out curGuid);
+
+                if (curGuid == vsCoreGuid)
+                {
+                    ErrorHandler.ThrowOnFailure(lines.SetLanguageServiceID(ref langGuid));
+                }
+                else if (curGuid != langGuid)
+                {
+                    ErrorHandler.ThrowOnFailure(VSConstants.VS_E_INCOMPATIBLEDOCDATA);
+                }
+
+                Guid detectLang = VSConstants.VsTextBufferUserDataGuid.VsBufferDetectLangSID_guid;
+                ErrorHandler.ThrowOnFailure(data.SetData(ref detectLang, false));
+            }
+
+            cmdUI = VSConstants.GUID_TextEditorFactory;
+            return Marshal.GetIUnknownForObject(window);
+        }
     }
 }

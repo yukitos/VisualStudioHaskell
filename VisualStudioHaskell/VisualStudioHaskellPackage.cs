@@ -49,6 +49,7 @@ namespace Company.VisualStudioHaskell
     // This attribute declares that your EditorPane class implements IVsCodeWindow interface
     // used to navigate to find results from a "Find in Files" type of operation.
     [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.TextView_string)]
+    [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.Designer_string)]
     [ProvideEditorLogicalView(typeof(EditorFactory), VSConstants.LOGVIEWID.Code_string)]
 
     [ProvideLanguageService(typeof(LanguageInfo), Constants.LanguageName, 106, RequestStockColors = true, ShowSmartIndent = true, ShowCompletion = true, DefaultToInsertSpaces = true, HideAdvancedMembersByDefault = true, EnableAdvancedMembersOption = true, ShowDropDownOptions = true)]
@@ -119,8 +120,6 @@ namespace Company.VisualStudioHaskell
             base.Initialize();
 
             var services = (IServiceContainer)this;
-
-            ;
 
             var optionsService = new Options.OptionsService(this);
 
