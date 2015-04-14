@@ -179,7 +179,7 @@ namespace Company.VisualStudioHaskell.Editor
             {
                 return VSConstants.E_INVALIDARG;
             }
-            if (punkDocDataExisting != IntPtr.Zero)
+            if (_promptEncoding && punkDocDataExisting != IntPtr.Zero)
             {
                 return VSConstants.VS_E_INCOMPATIBLEDOCDATA;
             }
@@ -222,9 +222,6 @@ namespace Company.VisualStudioHaskell.Editor
 
             try
             {
-                pbstrEditorCaption = string.Empty;
-                pguidCmdUI = Guid.Empty;
-
                 if (string.IsNullOrEmpty(pszPhysicalView))
                 {
                     ppunkDocView = CreateCodeView(pszMkDocument, lines, ref pbstrEditorCaption, ref pguidCmdUI);
@@ -257,6 +254,9 @@ namespace Company.VisualStudioHaskell.Editor
 
         private System.IntPtr CreateFormView(IVsHierarchy hierarchy, uint itemId, IVsTextLines lines, ref string caption, ref Guid cmdUI)
         {
+            caption = string.Empty;
+            cmdUI = Guid.Empty;
+
             var service = (IVSMDDesignerService)GetService(typeof(IVSMDDesignerService));
             var loader = (IVSMDDesignerLoader)service.CreateDesignerLoader("Microsoft.VisualStudio.Designer.Serialization.VSDesignerLoader");
 

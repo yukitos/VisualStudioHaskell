@@ -15,8 +15,5 @@ namespace Company.VisualStudioHaskell
 
         [Export, Name(ContentType), BaseDefinition("code")]
         internal static ContentTypeDefinition ContentTypeDefinition = null;
-
-        [Export, FileExtension(Constants.FileExtension), ContentType(ContentType)]
-        internal static FileExtensionToContentTypeDefinition FileExtensionToContentTypeDefinition = null;
     }
 }
