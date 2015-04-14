@@ -16,7 +16,8 @@ namespace Company.VisualStudioHaskell
     [Export(typeof(IClassifierProvider)), ContentType(CoreConstants.ContentType)]
     class ClassifierProvider : IClassifierProvider
     {
-        private IContentType _contentType;
+        private IClassificationType _identifier;
+        private readonly IContentType _contentType;
         internal readonly IServiceProvider _serviceProvider;
 
         [ImportingConstructor]
@@ -28,19 +29,35 @@ namespace Company.VisualStudioHaskell
 
         public IClassifier GetClassifier(ITextBuffer buffer)
         {
-            // not implemented
-            return null;
+            if (_identifier == null)
+            {
+                _identifier = _classificationRegistry.GetClassificationType(HaskellPredefinedClassificationTypeNames.Identifier);
+            }
+
+            Classifier classifier;
+
+            if (!buffer.Properties.TryGetProperty<Classifier>(typeof(Classifier), out classifier) &&
+                buffer.ContentType.IsOfType(_contentType.TypeName))
+            {
+                classifier = new Classifier(this);
+                buffer.Properties.AddProperty(typeof(Classifier), classifier);
+            }
+
+            return classifier;
         }
 
-        //[Import]
-        //public IClassificationTypeRegistryService _classificationRegistry = null;
         [Import]
-        internal IClassificationTypeRegistryService ClassificationRegistry = null;
+        public IClassificationTypeRegistryService _classificationRegistry = null;
 
         [Export]
         [Name(HaskellPredefinedClassificationTypeNames.Identifier)]
         [BaseDefinition(PredefinedClassificationTypeNames.Identifier)]
         internal static ClassificationTypeDefinition IdentifierClassificationDefinition = null;
+
+        public IClassificationType Identifier
+        {
+            get { return _identifier; }
+        }
     }
 
     [Export(typeof(EditorFormatDefinition))]
