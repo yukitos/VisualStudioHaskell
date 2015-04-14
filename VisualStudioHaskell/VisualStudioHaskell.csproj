@@ -155,20 +155,6 @@
     </Compile>
     <Compile Include="MyToolWindow.cs" />
     <Compile Include="Editor\EditorFactory.cs" />
-    <Compile Include="Editor\EditorPane.cs" />
-    <Compile Include="Editor\EditorTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Editor\EditorTextBox.designer.cs">
-      <DependentUpon>EditorTextBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Editor\IEditor.cs" />
-    <Compile Include="MyEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyEditor.designer.cs">
-      <DependentUpon>MyEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Options\IOptionsService.cs" />
     <Compile Include="Options\OptionsService.cs" />
@@ -204,18 +190,6 @@
     <Compile Include="PkgCmdID.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Editor\EditorPane.resx">
-      <DependentUpon>EditorPane.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Editor\EditorTextBox.resx">
-      <DependentUpon>EditorTextBox.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyEditor.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MyEditor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
