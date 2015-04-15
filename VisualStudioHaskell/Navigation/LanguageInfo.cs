@@ -44,7 +44,7 @@ namespace Company.VisualStudioHaskell.Navigation
         {
             // This is the same extension the language service was
             // registered as supporting.
-            pbstrExtensions = Constants.FileExtension;
+            pbstrExtensions = Constants.FileExtension + ";" + Constants.LiterateFileExtension;
             return VSConstants.S_OK;
         }
 

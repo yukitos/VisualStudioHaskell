@@ -159,6 +159,8 @@
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Options\IOptionsService.cs" />
     <Compile Include="Options\OptionsService.cs" />
+    <Compile Include="Parsing\ITokenizer.cs" />
+    <Compile Include="Parsing\LiterateTokenizer.cs" />
     <Compile Include="Parsing\Tokenizer.cs" />
     <Compile Include="ProjectFactory.cs" />
     <Compile Include="ProjectNode.cs" />

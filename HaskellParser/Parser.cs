@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Company.VisualStudioHaskell.Parsing
+namespace Company.VisualStudioHaskell.Parser
 {
-    class Tokenizer : ITokenizer
+    public class Parser
     {
     }
 }

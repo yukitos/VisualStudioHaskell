@@ -39,9 +39,14 @@ namespace Company.VisualStudioHaskell
     [ProvideMenuResource("Menus.ctmenu", 1)]
     // This attribute registers a tool window exposed by this package.
     [ProvideToolWindow(typeof(MyToolWindow))]
-    [ProvideEditorExtension(typeof(EditorFactory), ".hs", 50, 
-              ProjectGuid = "{A2FE74E1-B743-11d0-AE1A-00A0C90FFFC3}", 
-              TemplateDir = "Templates", 
+    [ProvideEditorExtension(typeof(EditorFactory), ".hs", 50,
+              ProjectGuid = "{A2FE74E1-B743-11d0-AE1A-00A0C90FFFC3}",
+              TemplateDir = "Templates",
+              NameResourceID = 105,
+              DefaultName = "VisualStudioHaskell")]
+    [ProvideEditorExtension(typeof(EditorFactory), ".lhs", 50,
+              ProjectGuid = "{A2FE74E1-B743-11d0-AE1A-00A0C90FFFC3}",
+              TemplateDir = "Templates",
               NameResourceID = 105,
               DefaultName = "VisualStudioHaskell")]
     [ProvideKeyBindingTable(GuidList.guidVisualStudioHaskellEditorFactoryString, 102)]
@@ -54,6 +59,7 @@ namespace Company.VisualStudioHaskell
 
     [ProvideLanguageService(typeof(LanguageInfo), Constants.LanguageName, 106, RequestStockColors = true, ShowSmartIndent = true, ShowCompletion = true, DefaultToInsertSpaces = true, HideAdvancedMembersByDefault = true, EnableAdvancedMembersOption = true, ShowDropDownOptions = true)]
     [ProvideLanguageExtension(typeof(LanguageInfo), Constants.FileExtension)]
+    [ProvideLanguageExtension(typeof(LanguageInfo), Constants.LiterateFileExtension)]
 
     [ProvideProjectFactory(
         typeof(ProjectFactory),

@@ -11,5 +11,6 @@ namespace Company.VisualStudioHaskell
         public const string LanguageName = "Haskell";
 
         internal const string FileExtension = ".hs";
+        internal const string LiterateFileExtension = ".lhs";
     }
 }

@@ -31,7 +31,7 @@ namespace Company.VisualStudioHaskell
         {
             if (_identifier == null)
             {
-                _identifier = _classificationRegistry.GetClassificationType(HaskellPredefinedClassificationTypeNames.Identifier);
+                _identifier = _classificationRegistry.GetClassificationType(PredefinedClassificationTypeNames.Keyword);
             }
 
             Classifier classifier;
