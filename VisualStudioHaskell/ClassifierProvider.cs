@@ -39,7 +39,7 @@ namespace Company.VisualStudioHaskell
             if (!buffer.Properties.TryGetProperty<Classifier>(typeof(Classifier), out classifier) &&
                 buffer.ContentType.IsOfType(_contentType.TypeName))
             {
-                classifier = new Classifier(this);
+                classifier = new Classifier(this, buffer);
                 buffer.Properties.AddProperty(typeof(Classifier), classifier);
             }
 

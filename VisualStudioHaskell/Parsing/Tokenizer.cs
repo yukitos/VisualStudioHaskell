@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Company.VisualStudioHaskell.Parsing
 {
-    class Tokenizer : ITokenizer
+    class Tokenizer
     {
     }
 }
