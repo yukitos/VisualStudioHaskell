@@ -23,6 +23,8 @@ namespace Company.VisualStudioHaskell
 
         public IList<ClassificationSpan> GetClassificationSpans(SnapshotSpan span)
         {
+            // TODO: implement this method
+
             string text = span.Snapshot.GetText();
 
             var list = new List<ClassificationSpan>();
