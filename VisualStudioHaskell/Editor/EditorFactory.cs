@@ -20,7 +20,7 @@ namespace Company.VisualStudioHaskell.Editor
     /// Factory for creating our editor object. Extends from the IVsEditoryFactory interface
     /// </summary>
     [Guid(GuidList.guidVisualStudioHaskellEditorFactoryString)]
-    public sealed class EditorFactory : IVsEditorFactory
+    public sealed class EditorFactory : IVsEditorFactory, IDisposable
     {
         private VisualStudioHaskellPackage _package;
         private ServiceProvider _vsServiceProvider;
@@ -38,6 +38,19 @@ namespace Company.VisualStudioHaskell.Editor
             Debug.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering {0} constructor", this.ToString()));
 
             _package = package;
+        }
+
+        /// <summary>
+        /// Since we create a ServiceProvider which implements IDisposable we
+        /// also need to implement IDisposable to make sure that the ServiceProvider's
+        /// Dispose method gets called.
+        /// </summary>
+        public void Dispose()
+        {
+            if (_vsServiceProvider != null)
+            {
+                _vsServiceProvider.Dispose();
+            }
         }
 
         #region IVsEditorFactory Members

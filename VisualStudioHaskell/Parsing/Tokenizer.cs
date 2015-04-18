@@ -9,11 +9,11 @@ namespace Company.VisualStudioHaskell.Parsing
 {
     struct Token
     {
+        // TODO: implement this
+
         public enum Kind
         {
-            FirstKeyword = KeywordAs,
-            LastKeyword = KeywordWhere,
-            KeywordAs,
+            KeywordAs = 0,
             KeywordCase,
             KeywordOf,
             KeywordData,
@@ -42,6 +42,8 @@ namespace Company.VisualStudioHaskell.Parsing
             KeywordRec,
             KeywordType,
             KeywordWhere,
+            FirstKeyword = KeywordAs,
+            LastKeyword = KeywordWhere,
         }
     }
 
