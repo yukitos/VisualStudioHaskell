@@ -57,6 +57,13 @@
           <ButtonText>VisualStudioHaskell Context Menu</ButtonText>
         </Strings>
       </Menu>
+      
+      <Menu guid="guidVisualStudioHaskellCmdSet" id="MyMenu" priority="0x8008" type="Menu">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_TOOLS_OTHER2"/>
+        <Strings>
+          <ButtonText>Visual Studio Haskell</ButtonText>
+        </Strings>
+      </Menu>
     </Menus>
     
     <!-- In this section you can define new menu groups. A menu group is a container for 
@@ -66,7 +73,7 @@
     <Groups>
 
       <Group guid="guidVisualStudioHaskellCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+        <Parent guid="guidVisualStudioHaskellCmdSet" id="MyMenu"/>
       </Group>
       
 
@@ -301,6 +308,7 @@
       <IDSymbol name="IDG_RTF_CTX_PROPS" value="0x100a" />
       <IDSymbol name="IDG_RTF_EDITOR_CMDS" value="0x100b" />
       <IDSymbol name="MyMenuGroup" value="0x1020" />
+      <IDSymbol name="MyMenu" value="0x1021" />
       <IDSymbol name="cmdidMyCommand" value="0x0100" />
       <IDSymbol name="cmdidMyTool" value="0x0101" />
       <IDSymbol name="commandIDStrike" value="0x0102" />
