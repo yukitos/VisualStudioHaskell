@@ -36,5 +36,7 @@ namespace Company.VisualStudioHaskell
 
         public const int icmdStrike = 0x0004;
 
+        public const uint icmdReplWindow = 0x201;
+
     };
 }

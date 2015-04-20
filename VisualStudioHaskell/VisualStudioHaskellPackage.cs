@@ -13,6 +13,8 @@ using Microsoft.VisualStudio.Settings;
 
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Utilities;
+using Microsoft.VisualStudioTools;
+using Microsoft.VisualStudioTools.Navigation;
 
 namespace Company.VisualStudioHaskell
 {
@@ -71,11 +73,11 @@ namespace Company.VisualStudioHaskell
         LanguageVsTemplate = "HaskellProject")]
 
     [Guid(GuidList.guidVisualStudioHaskellPkgString)]
-    public sealed class VisualStudioHaskellPackage : Microsoft.VisualStudio.Project.ProjectPackage
+    public sealed class VisualStudioHaskellPackage : CommonPackage
     {
         internal Service _hsService;
 
-        public override string ProductUserContext
+        public string ProductUserContext
         {
             get { return ""; }
         }
@@ -139,7 +141,7 @@ namespace Company.VisualStudioHaskell
 
             //Create Editor Factory. Note that the base Package class will call Dispose on it.
             base.RegisterEditorFactory(new EditorFactory(this));
-
+            /*
             // Add our command handlers for menu (commands must exist in the .vsct file)
             OleMenuCommandService mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
             if ( null != mcs )
@@ -152,12 +154,37 @@ namespace Company.VisualStudioHaskell
                 CommandID toolwndCommandID = new CommandID(GuidList.guidVisualStudioHaskellCmdSet, (int)PkgCmdIDList.cmdidMyTool);
                 MenuCommand menuToolWin = new MenuCommand(ShowToolWindow, toolwndCommandID);
                 mcs.AddCommand( menuToolWin );
-            }
+            }*/
 
-            foreach (var c in ((IComponentModel)Package.GetGlobalService(typeof(SComponentModel))).GetService<IContentTypeRegistryService>().ContentTypes)
+            Microsoft.VisualStudioTools.Command[] commands = {
+                new Commands.OpenInteractionCommand(this, (int)PkgCmdIDList.cmdidMyCommand)
+            };
+            RegisterCommands(commands, GuidList.guidVisualStudioHaskellCmdSet);
+        }
+
+        protected override object GetAutomationObject(string name)
+        {
+            /* if (name == "VsPython")
             {
-                Trace.WriteLine(c.DisplayName);
-            }
+                return _autoObject;
+            }*/
+
+            return base.GetAutomationObject(name);
+        }
+
+        internal override LibraryManager CreateLibraryManager(CommonPackage package)
+        {
+            return new HaskellLibraryManager((VisualStudioHaskellPackage)package);
+        }
+
+        public override bool IsRecognizedFile(string filename)
+        {
+            return filename.EndsWith(".hs");
+        }
+
+        public override Type GetLibraryManagerType()
+        {
+            return typeof(IHaskellLibraryManager);
         }
         #endregion
 

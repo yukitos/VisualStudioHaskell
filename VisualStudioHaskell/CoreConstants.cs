@@ -11,7 +11,7 @@ namespace Company.VisualStudioHaskell
     internal static class CoreConstants
     {
         public const string ContentType = "Haskell";
-        // public const string BaseRegistryKey = "";
+        public const string BaseRegistryKey = "VisualStudioHaskell";
 
         [Export, Name(ContentType), BaseDefinition("code")]
         internal static ContentTypeDefinition ContentTypeDefinition = null;

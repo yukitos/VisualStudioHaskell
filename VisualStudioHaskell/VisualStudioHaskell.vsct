@@ -133,6 +133,14 @@
         </Strings>
       </Button>
 
+      <Button guid="guidVisualStudioHaskellCmdSet" id="cmdidMyCommand" priority="0x0101" type="Button">
+        <Parent guid="guidVisualStudioHaskellCmdSet" id="cmdidReplWindow" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Haskell Interactive</ButtonText>
+        </Strings>
+      </Button>
+
 
       <Button guid="guidVisualStudioHaskellCmdSet" id="cmdidMyTool" priority="0x0100" type="Button">
         <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
@@ -312,6 +320,7 @@
       <IDSymbol name="cmdidMyCommand" value="0x0100" />
       <IDSymbol name="cmdidMyTool" value="0x0101" />
       <IDSymbol name="commandIDStrike" value="0x0102" />
+      <IDSymbol name="cmdidReplWindow" value="0x0201" />
     </GuidSymbol>
     
     <GuidSymbol name="guidVisualStudioHaskellEditorFactory" value="{a388943a-a759-4945-826a-f41a8a1ddbea}" />
