@@ -12,5 +12,7 @@ namespace Company.VisualStudioHaskell
 
         internal const string FileExtension = ".hs";
         internal const string LiterateFileExtension = ".lhs";
+
+        internal const string ProjectImageList = "Company.VisualStudioHaskell.HaskellImageList.png";
     }
 }

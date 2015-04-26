@@ -18,7 +18,7 @@ namespace Company.VisualStudioHaskell
             _package = package;
         }
 
-        #region Abstract Property implementation (incomplete)
+        #region Abstract property implementation (incomplete)
 
         public override Guid ProjectGuid
         {
@@ -39,7 +39,7 @@ namespace Company.VisualStudioHaskell
 
         #endregion
 
-        #region Abstract Method implementation (incomplete)
+        #region Abstract method implementation (incomplete)
 
         public override Type GetProjectFactoryType()
         {
