@@ -6,23 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudioTools.Project;
 
 using IOleServiceProvider = Microsoft.VisualStudio.OLE.Interop.IServiceProvider;
 
 namespace Company.VisualStudioHaskell
 {
     [Guid(GuidList.guidVisualStudioHaskellProjectFactoryString)]
-    class ProjectFactory : Microsoft.VisualStudio.Project.ProjectFactory
+    class ProjectFactory : Microsoft.VisualStudioTools.Project.ProjectFactory
     {
         private VisualStudioHaskellPackage _package;
 
         public ProjectFactory(VisualStudioHaskellPackage package) :
-            base(package)
+            base((IServiceProvider)package)
         {
             Console.WriteLine("TestTestTest!");
             _package = package;
         }
-        protected override Microsoft.VisualStudio.Project.ProjectNode CreateProject()
+        internal override Microsoft.VisualStudioTools.Project.ProjectNode CreateProject()
         {
             var project = new ProjectNode(_package);
             project.SetSite((IOleServiceProvider)((IServiceProvider)_package).GetService(typeof(IOleServiceProvider)));

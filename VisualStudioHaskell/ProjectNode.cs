@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.VisualStudioTools.Project;
 
 namespace Company.VisualStudioHaskell
 {
-    class ProjectNode : Microsoft.VisualStudio.Project.ProjectNode
+    class ProjectNode : CommonProjectNode
     {
         private VisualStudioHaskellPackage _package;
 
         public ProjectNode(VisualStudioHaskellPackage package)
+            : base(package, Utilities.GetImageList(typeof(ProjectNode).Assembly.GetManifestResourceStream(Constants.ProjectImageList)))
         {
             _package = package;
         }
+
+        #region Abstract Property implementation (incomplete)
+
         public override Guid ProjectGuid
         {
             get { return GuidList.guidVisualStudioHaskellProjectFactory; }
@@ -22,11 +28,54 @@ namespace Company.VisualStudioHaskell
         {
             get { return "Haskell Project"; }
         }
-        public override void AddFileFromTemplate(
-           string source, string target)
+        internal override string IssueTrackerUrl
         {
-            this.FileTemplateProcessor.UntokenFile(source, target);
-            this.FileTemplateProcessor.Reset();
+            get { return ""; }
         }
+        protected override Stream ProjectIconsImageStripStream
+        {
+            get { return typeof(ProjectNode).Assembly.GetManifestResourceStream("Company.VisualStudioHaskell.Project.Resources.imagelis.bmp"); }
+        }
+
+        #endregion
+
+        #region Abstract Method implementation (incomplete)
+
+        public override Type GetProjectFactoryType()
+        {
+            return typeof(ProjectFactory);
+        }
+
+        public override Type GetEditorFactoryType()
+        {
+            return typeof(Editor.EditorFactory);
+        }
+
+        public override string GetProjectName()
+        {
+            return "";
+        }
+
+        public override string GetFormatList()
+        {
+            return "";
+        }
+
+        public override Type GetGeneralPropertyPageType()
+        {
+            return null;
+        }
+
+        public override Type GetLibraryManagerType()
+        {
+            return typeof(Navigation.HaskellLibraryManager);
+        }
+
+        public override IProjectLauncher/*!*/ GetLauncher()
+        {
+            return null;
+        }
+
+        #endregion
     }
 }
