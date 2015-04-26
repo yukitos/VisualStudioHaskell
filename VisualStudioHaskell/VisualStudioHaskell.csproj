@@ -175,6 +175,11 @@
     <Compile Include="Interaction\IInteractionFactory.cs" />
     <Compile Include="Interaction\InteractionConfiguration.cs" />
     <Compile Include="Interaction\InteractionEvaluatorProvider.cs" />
+    <Compile Include="Interaction\InteractionStreamReader.cs" />
+    <Compile Include="Interpreter\IInterpreter.cs" />
+    <Compile Include="Interpreter\IInterpreterFactory.cs" />
+    <Compile Include="Interpreter\IInterpreterOptionsService.cs" />
+    <Compile Include="Interpreter\InterpreterOptionsService.cs" />
     <Compile Include="Navigation\CodeWindowManager.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="CoreConstants.cs" />
@@ -370,6 +375,8 @@
     <Compile Include="SharedProject\Wpf\LambdaConverter\LambdaProperties.cs" />
     <Compile Include="SharedProject\Wpf\NativeMethods.cs" />
     <Compile Include="VSMacroRecorder.cs" />
+    <EmbeddedResource Include="HaskellImageList.png" />
+    <EmbeddedResource Include="Project\Resources\imagelis.bmp" />
     <Content Include="Templates\Main.hs">
       <IncludeInVSIX>true</IncludeInVSIX>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
