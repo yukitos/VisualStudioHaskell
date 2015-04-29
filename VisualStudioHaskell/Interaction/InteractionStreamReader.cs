@@ -52,13 +52,13 @@ namespace Company.VisualStudioHaskell.Interaction
                 {
                     builder.Append((char)ch);
 
-                    if (builder.StartsWith(prompt1))
+                    if (builder.Length == prompt1.Length && builder.StartsWith(prompt1))
                     {
-                        builder.Remove(0, prompt1.Length);
+                        builder.Clear();
                     }
-                    else if (builder.StartsWith(prompt2))
+                    else if (builder.Length == prompt2.Length && builder.StartsWith(prompt2))
                     {
-                        builder.Remove(0, prompt2.Length);
+                        builder.Clear();
                     }
                 }
             }
