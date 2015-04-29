@@ -22,6 +22,7 @@ namespace Company.VisualStudioHaskell.Interaction
 
         public Thread CreateThread()
         {
+            _shouldStop = false;
             return new Thread(ReadThread);
         }
 
