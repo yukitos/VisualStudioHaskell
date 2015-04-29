@@ -6,7 +6,6 @@ namespace Company.VisualStudioHaskell
 {
     static class PkgCmdIDList
     {
-        public const uint cmdidMyCommand =        0x100;
         public const uint cmdidMyTool =    0x101;
 
         // Menus
@@ -36,7 +35,7 @@ namespace Company.VisualStudioHaskell
 
         public const int icmdStrike = 0x0004;
 
-        public const uint icmdReplWindow = 0x201;
+        public const uint icmdReplWindow = 0x100;
 
     };
 }

@@ -157,7 +157,7 @@ namespace Company.VisualStudioHaskell
             }*/
 
             Microsoft.VisualStudioTools.Command[] commands = {
-                new Commands.OpenInteractionCommand(this, (int)PkgCmdIDList.cmdidMyCommand)
+                new Commands.OpenInteractionCommand(this, (int)PkgCmdIDList.icmdReplWindow)
             };
             RegisterCommands(commands, GuidList.guidVisualStudioHaskellCmdSet);
         }

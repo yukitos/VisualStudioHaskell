@@ -125,16 +125,8 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
 
-      <Button guid="guidVisualStudioHaskellCmdSet" id="cmdidMyCommand" priority="0x0100" type="Button">
+      <Button guid="guidVisualStudioHaskellCmdSet" id="cmdidReplWindow" priority="0x0100" type="Button">
         <Parent guid="guidVisualStudioHaskellCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
-        <Strings>
-          <ButtonText>My Command name</ButtonText>
-        </Strings>
-      </Button>
-
-      <Button guid="guidVisualStudioHaskellCmdSet" id="cmdidMyCommand" priority="0x0101" type="Button">
-        <Parent guid="guidVisualStudioHaskellCmdSet" id="cmdidReplWindow" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <ButtonText>Haskell Interactive</ButtonText>
@@ -317,10 +309,9 @@
       <IDSymbol name="IDG_RTF_EDITOR_CMDS" value="0x100b" />
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="MyMenu" value="0x1021" />
-      <IDSymbol name="cmdidMyCommand" value="0x0100" />
       <IDSymbol name="cmdidMyTool" value="0x0101" />
       <IDSymbol name="commandIDStrike" value="0x0102" />
-      <IDSymbol name="cmdidReplWindow" value="0x0201" />
+      <IDSymbol name="cmdidReplWindow" value="0x0100" />
     </GuidSymbol>
     
     <GuidSymbol name="guidVisualStudioHaskellEditorFactory" value="{a388943a-a759-4945-826a-f41a8a1ddbea}" />
