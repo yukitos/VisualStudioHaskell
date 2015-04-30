@@ -19,6 +19,7 @@ using Microsoft.VisualStudioTools.Navigation;
 namespace Company.VisualStudioHaskell
 {
     using Editor;
+    using Microsoft.VisualStudioTools.Haskell;
     using Navigation;
 
     /// <summary>
@@ -132,6 +133,8 @@ namespace Company.VisualStudioHaskell
             var optionsService = new Options.OptionsService(this);
 
             services.AddService(typeof(Options.IOptionsService), optionsService, promote: true);
+
+            services.AddService(typeof(IClipboardService), new ClipboardService(), promote: true);
 
             var hsService = _hsService = new Service(services);
 
