@@ -76,6 +76,10 @@ namespace Company.VisualStudioHaskell
             return null;
         }
 
+        protected override NodeProperties CreatePropertiesObject()
+        {
+            return new ProjectNodeProperties(this);
+        }
         #endregion
     }
 }
