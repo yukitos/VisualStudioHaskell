@@ -16,7 +16,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace Microsoft.VisualStudioTools {
+namespace Microsoft.VisualStudioTools.Haskell {
     /// <summary>
     /// Provides the ability to run code on the VS UI thread.
     /// </summary>

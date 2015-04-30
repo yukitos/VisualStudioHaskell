@@ -7,7 +7,7 @@ using System.Diagnostics;
 using Microsoft.VisualStudio.Utilities;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudioTools;
+using Microsoft.VisualStudioTools.Haskell;
 
 namespace Company.VisualStudioHaskell
 {

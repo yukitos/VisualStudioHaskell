@@ -16,6 +16,7 @@ using System;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudioTools.Project;
+using Microsoft.VisualStudioTools.Haskell;
 
 namespace Microsoft.VisualStudioTools {
 

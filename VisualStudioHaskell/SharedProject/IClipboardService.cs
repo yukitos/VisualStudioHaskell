@@ -15,7 +15,7 @@
 using System;
 using Microsoft.VisualStudio.OLE.Interop;
 
-namespace Microsoft.VisualStudioTools {
+namespace Microsoft.VisualStudioTools.Haskell {
     interface IClipboardService {
         void SetClipboard(IDataObject dataObject);
 

@@ -22,6 +22,7 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudioTools.Project;
 using Microsoft.VisualStudioTools.Project.Automation;
+using Microsoft.VisualStudioTools.Haskell;
 using VsShellUtil = Microsoft.VisualStudio.Shell.VsShellUtilities;
 
 namespace Microsoft.VisualStudioTools {
