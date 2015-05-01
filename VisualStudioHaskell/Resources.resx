@@ -123,6 +123,12 @@
   <data name="DebugPropertyPageTitle" xml:space="preserve">
     <value>Debug</value>
   </data>
+  <data name="DefaultLauncherDescription" xml:space="preserve">
+    <value>Standard Haskell launcher.</value>
+  </data>
+  <data name="DefaultLauncherName" xml:space="preserve">
+    <value>Standard Haskell launcher</value>
+  </data>
   <data name="GeneralPropertyPageTitle" xml:space="preserve">
     <value>General</value>
   </data>

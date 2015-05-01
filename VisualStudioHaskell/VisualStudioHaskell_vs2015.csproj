@@ -98,6 +98,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -112,6 +113,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="System.Xaml" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -205,19 +207,24 @@
     <Compile Include="ProjectNode.cs" />
     <Compile Include="ProjectNodeProperties.cs" />
     <Compile Include="ProjectResources.cs" />
+    <Compile Include="Project\DefaultLauncherProvider.cs" />
     <Compile Include="Project\HaskellDebugPropertyPage.cs" />
-    <Compile Include="Project\HaskellDebugPropertyPageControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Project\HaskellDebugPropertyPageControl.Designer.cs">
-      <DependentUpon>HaskellDebugPropertyPageControl.cs</DependentUpon>
+    <Compile Include="Project\HaskellDebugPropertyPageControl.xaml.cs">
+      <DependentUpon>HaskellDebugPropertyPageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Project\HaskellGeneralPropertyPage.cs" />
-    <Compile Include="Project\HaskellGeneralPropertyPageControl.cs">
+    <Compile Include="Project\HaskellGeneralPropertyPageControl.xaml.cs">
+      <DependentUpon>HaskellGeneralPropertyPageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Project\IAsyncCommand.cs" />
+    <Compile Include="Project\IHaskellLauncherOptions.cs" />
+    <Compile Include="Project\IHaskellLauncherProvider.cs" />
+    <Compile Include="Project\IHaskellProject.cs" />
+    <Compile Include="Project\WpfPropertyPageControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Project\HaskellGeneralPropertyPageControl.Designer.cs">
-      <DependentUpon>HaskellGeneralPropertyPageControl.cs</DependentUpon>
+    <Compile Include="Project\WpfPropertyPageControl.Designer.cs">
+      <DependentUpon>WpfPropertyPageControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Service.cs" />
     <Compile Include="SharedProject\AllFilesProjectElement.cs" />
@@ -396,12 +403,6 @@
     <Compile Include="SharedProject\Wpf\NativeMethods.cs" />
     <Compile Include="VSMacroRecorder.cs" />
     <EmbeddedResource Include="HaskellImageList.png" />
-    <EmbeddedResource Include="Project\HaskellDebugPropertyPageControl.resx">
-      <DependentUpon>HaskellDebugPropertyPageControl.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Project\HaskellGeneralPropertyPageControl.resx">
-      <DependentUpon>HaskellGeneralPropertyPageControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Project\Resources\imagelis.bmp" />
     <Content Include="Templates\Main.hs">
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -429,6 +430,9 @@
     <Compile Include="PkgCmdID.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Project\WpfPropertyPageControl.resx">
+      <DependentUpon>WpfPropertyPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources.ja-JP.resx" />
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -487,6 +491,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MyControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Project\HaskellDebugPropertyPageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Project\HaskellGeneralPropertyPageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

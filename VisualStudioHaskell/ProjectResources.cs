@@ -16,6 +16,8 @@ namespace Company.VisualStudioHaskell
         public const string IdentifierClassificationType = "IdentifierClassificationType";
         public const string GeneralPropertyPageTitle = "GeneralPropertyPageTitle";
         public const string DebugPropertyPageTitle = "DebugPropertyPageTitle";
+        public const string DefaultLauncherName = "DefaultLauncherName";
+        public const string DefaultLauncherDescription = "DefaultLauncherDescription";
 
         private static readonly Lazy<ResourceManager> _manager = new Lazy<ResourceManager>(
             () => new ResourceManager("Company.VisualStudioHaskell.Resources", typeof(ProjectResources).Assembly),

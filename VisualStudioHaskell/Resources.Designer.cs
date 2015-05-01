@@ -79,6 +79,24 @@ namespace Company.VisualStudioHaskell {
         }
         
         /// <summary>
+        ///   Standard Haskell launcher. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DefaultLauncherDescription {
+            get {
+                return ResourceManager.GetString("DefaultLauncherDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Standard Haskell launcher に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DefaultLauncherName {
+            get {
+                return ResourceManager.GetString("DefaultLauncherName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   General に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string GeneralPropertyPageTitle {

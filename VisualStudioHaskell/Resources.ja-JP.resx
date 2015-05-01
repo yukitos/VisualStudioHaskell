@@ -123,6 +123,12 @@
   <data name="DebugPropertyPageTitle" xml:space="preserve">
     <value>デバッグ</value>
   </data>
+  <data name="DefaultLauncherDescription" xml:space="preserve">
+    <value>標準のHaskellランチャー</value>
+  </data>
+  <data name="DefaultLauncherName" xml:space="preserve">
+    <value>標準のHaskellランチャー</value>
+  </data>
   <data name="GeneralPropertyPageTitle" xml:space="preserve">
     <value>設定</value>
   </data>

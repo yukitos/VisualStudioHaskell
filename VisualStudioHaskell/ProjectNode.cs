@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.VisualStudioTools.Project;
+using Company.VisualStudioHaskell.Project;
+using Microsoft.Build.Execution;
 
 namespace Company.VisualStudioHaskell
 {
-    class ProjectNode : CommonProjectNode
+    class ProjectNode : CommonProjectNode, IHaskellProject
     {
         private VisualStudioHaskellPackage _package;
 
@@ -90,5 +92,54 @@ namespace Company.VisualStudioHaskell
             };
         }
         #endregion
+
+        #region IHaskellProject implementation
+
+        public string GetProperty(string propertyName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetProperty(string propertyName, string value)
+        {
+
+        }
+
+        public new string GetStartupFile()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string ProjectDirectory
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string ProjectName
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public bool Publish(PublishProjectOptions options)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IAsyncCommand FindCommand(string canonicalName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ProjectInstance GetMSBuildProjectInstance()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddActionOnClose(object key, Action<object> action)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion // IHaskellProject implementation
     }
 }

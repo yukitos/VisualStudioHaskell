@@ -16,11 +16,13 @@ namespace Company.VisualStudioHaskell.Project
     [Guid(Constants.GeneralPropertyPageGuid)]
     public class HaskellGeneralPropertyPage : CommonPropertyPage
     {
-        private readonly HaskellGeneralPropertyPageControl _control;
+        private readonly HaskellGeneralPropertyPageControl _pageControl;
+        private readonly WpfPropertyPageControl<HaskellGeneralPropertyPageControl> _control;
 
         public HaskellGeneralPropertyPage()
         {
-            _control = new HaskellGeneralPropertyPageControl(this);
+            _pageControl = new HaskellGeneralPropertyPageControl(this);
+            _control = new WpfPropertyPageControl<HaskellGeneralPropertyPageControl>(_pageControl);
         }
 
         public override Control Control
@@ -45,6 +47,15 @@ namespace Company.VisualStudioHaskell.Project
 
         public override void LoadSettings()
         {
+            Loading = true;
+            try
+            {
+                _pageControl.LoadSettings();
+            }
+            finally
+            {
+                Loading = false;
+            }
         }
     }
 }

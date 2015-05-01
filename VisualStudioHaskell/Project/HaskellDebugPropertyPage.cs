@@ -8,14 +8,16 @@ namespace Company.VisualStudioHaskell.Project
 {
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable",
         Justification = "object is owned by VS")]
-    [Guid("A69FDF34-BAAA-43ED-B4DF-F47F4D4D845F")]
+    [Guid(Constants.DebugPropertyPageGuid)]
     public class HaskellDebugPropertyPage : CommonPropertyPage
     {
-        private readonly HaskellDebugPropertyPageControl _control;
+        private readonly HaskellDebugPropertyPageControl _pageControl;
+        private readonly WpfPropertyPageControl<HaskellDebugPropertyPageControl> _control;
 
         public HaskellDebugPropertyPage()
         {
-            _control = new HaskellDebugPropertyPageControl(this);
+            _pageControl = new HaskellDebugPropertyPageControl(this);
+            _control = new WpfPropertyPageControl<HaskellDebugPropertyPageControl>(_pageControl);
         }
 
         public override Control Control
@@ -36,11 +38,23 @@ namespace Company.VisualStudioHaskell.Project
 
         public override void Apply()
         {
+            //Project.SetProjectProperty(Constants.LaunchProvider, _pageControl.CurrentLauncher);
+            //_pageControl.SaveSettings();
+
+            //IsDirty = false;
         }
 
         public override void LoadSettings()
         {
+            Loading = true;
+            try
+            {
+                //_pageControl.LoadSettings();
+            }
+            finally
+            {
+                Loading = false;
+            }
         }
-
     }
 }

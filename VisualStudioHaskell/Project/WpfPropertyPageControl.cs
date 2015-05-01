@@ -10,15 +10,13 @@ using System.Windows.Forms;
 
 namespace Company.VisualStudioHaskell.Project
 {
-    public partial class HaskellGeneralPropertyPageControl : UserControl
+    public partial class WpfPropertyPageControl<T> : UserControl
+        where T : System.Windows.Controls.Control
     {
-        private readonly HaskellGeneralPropertyPage _propPage;
-
-        public HaskellGeneralPropertyPageControl(HaskellGeneralPropertyPage newHaskellGeneralPropertyPage)
+        public WpfPropertyPageControl(T control)
         {
             InitializeComponent();
-
-            _propPage = newHaskellGeneralPropertyPage;
+            elementHost1.Child = control;
         }
     }
 }

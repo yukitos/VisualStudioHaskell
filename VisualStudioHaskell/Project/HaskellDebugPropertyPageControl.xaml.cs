@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Company.VisualStudioHaskell.Project
 {
+    /// <summary>
+    /// HaskellDebugPropertyPageControl.xaml の相互作用ロジック
+    /// </summary>
     public partial class HaskellDebugPropertyPageControl : UserControl
     {
-        private readonly HaskellDebugPropertyPage _page;
-
         public HaskellDebugPropertyPageControl(HaskellDebugPropertyPage page)
         {
             InitializeComponent();
-
-            _page = page;
         }
     }
 }
