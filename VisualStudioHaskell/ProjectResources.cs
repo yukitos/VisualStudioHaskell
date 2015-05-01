@@ -14,6 +14,7 @@ namespace Company.VisualStudioHaskell
     internal class ProjectResources
     {
         public const string IdentifierClassificationType = "IdentifierClassificationType";
+        public const string GeneralPropertyPageTitle = "GeneralPropertyPageTitle";
 
         private static readonly Lazy<ResourceManager> _manager = new Lazy<ResourceManager>(
             () => new ResourceManager("Company.VisualStudioHaskell.Resources", typeof(ProjectResources).Assembly),

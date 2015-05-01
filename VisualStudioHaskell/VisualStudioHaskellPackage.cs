@@ -18,6 +18,7 @@ using Microsoft.VisualStudioTools.Navigation;
 
 namespace Company.VisualStudioHaskell
 {
+    using Company.VisualStudioHaskell.Project;
     using Editor;
     using Microsoft.VisualStudioTools.Haskell;
     using Navigation;
@@ -63,6 +64,8 @@ namespace Company.VisualStudioHaskell
     [ProvideLanguageService(typeof(LanguageInfo), Constants.LanguageName, 106, RequestStockColors = true, ShowSmartIndent = true, ShowCompletion = true, DefaultToInsertSpaces = true, HideAdvancedMembersByDefault = true, EnableAdvancedMembersOption = true, ShowDropDownOptions = true)]
     [ProvideLanguageExtension(typeof(LanguageInfo), Constants.FileExtension)]
     [ProvideLanguageExtension(typeof(LanguageInfo), Constants.LiterateFileExtension)]
+
+    [ProvideObject(typeof(HaskellGeneralPropertyPage))]
 
     [ProvideProjectFactory(
         typeof(ProjectFactory),

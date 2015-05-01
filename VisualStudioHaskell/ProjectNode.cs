@@ -80,6 +80,14 @@ namespace Company.VisualStudioHaskell
         {
             return new ProjectNodeProperties(this);
         }
+
+        protected override Guid[] GetConfigurationIndependentPropertyPages()
+        {
+            return new[]
+            {
+                typeof(Project.HaskellGeneralPropertyPage).GUID
+            };
+        }
         #endregion
     }
 }

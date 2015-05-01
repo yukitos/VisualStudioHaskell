@@ -14,5 +14,7 @@ namespace Company.VisualStudioHaskell
         internal const string LiterateFileExtension = ".lhs";
 
         internal const string ProjectImageList = "Company.VisualStudioHaskell.HaskellImageList.png";
+
+        internal const string GeneralPropertyPageGuid = "A163A3E6-617C-4136-A06F-0EF981192EB4";
     }
 }

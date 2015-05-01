@@ -205,6 +205,13 @@
     <Compile Include="ProjectNode.cs" />
     <Compile Include="ProjectNodeProperties.cs" />
     <Compile Include="ProjectResources.cs" />
+    <Compile Include="Project\HaskellGeneralPropertyPage.cs" />
+    <Compile Include="Project\HaskellGeneralPropertyPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\HaskellGeneralPropertyPageControl.Designer.cs">
+      <DependentUpon>HaskellGeneralPropertyPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Service.cs" />
     <Compile Include="SharedProject\AllFilesProjectElement.cs" />
     <Compile Include="SharedProject\AssemblyReferenceNode.cs" />
@@ -382,6 +389,9 @@
     <Compile Include="SharedProject\Wpf\NativeMethods.cs" />
     <Compile Include="VSMacroRecorder.cs" />
     <EmbeddedResource Include="HaskellImageList.png" />
+    <EmbeddedResource Include="Project\HaskellGeneralPropertyPageControl.resx">
+      <DependentUpon>HaskellGeneralPropertyPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\Resources\imagelis.bmp" />
     <Content Include="Templates\Main.hs">
       <IncludeInVSIX>true</IncludeInVSIX>
@@ -409,6 +419,7 @@
     <Compile Include="PkgCmdID.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources.ja-JP.resx" />
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
