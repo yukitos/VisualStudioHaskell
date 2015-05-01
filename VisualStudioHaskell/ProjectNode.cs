@@ -85,7 +85,8 @@ namespace Company.VisualStudioHaskell
         {
             return new[]
             {
-                typeof(Project.HaskellGeneralPropertyPage).GUID
+                typeof(Project.HaskellGeneralPropertyPage).GUID,
+                typeof(Project.HaskellDebugPropertyPage).GUID
             };
         }
         #endregion

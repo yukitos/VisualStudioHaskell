@@ -66,6 +66,7 @@ namespace Company.VisualStudioHaskell
     [ProvideLanguageExtension(typeof(LanguageInfo), Constants.LiterateFileExtension)]
 
     [ProvideObject(typeof(HaskellGeneralPropertyPage))]
+    [ProvideObject(typeof(HaskellDebugPropertyPage))]
 
     [ProvideProjectFactory(
         typeof(ProjectFactory),

@@ -205,6 +205,13 @@
     <Compile Include="ProjectNode.cs" />
     <Compile Include="ProjectNodeProperties.cs" />
     <Compile Include="ProjectResources.cs" />
+    <Compile Include="Project\HaskellDebugPropertyPage.cs" />
+    <Compile Include="Project\HaskellDebugPropertyPageControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Project\HaskellDebugPropertyPageControl.Designer.cs">
+      <DependentUpon>HaskellDebugPropertyPageControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Project\HaskellGeneralPropertyPage.cs" />
     <Compile Include="Project\HaskellGeneralPropertyPageControl.cs">
       <SubType>UserControl</SubType>
@@ -389,6 +396,9 @@
     <Compile Include="SharedProject\Wpf\NativeMethods.cs" />
     <Compile Include="VSMacroRecorder.cs" />
     <EmbeddedResource Include="HaskellImageList.png" />
+    <EmbeddedResource Include="Project\HaskellDebugPropertyPageControl.resx">
+      <DependentUpon>HaskellDebugPropertyPageControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Project\HaskellGeneralPropertyPageControl.resx">
       <DependentUpon>HaskellGeneralPropertyPageControl.cs</DependentUpon>
     </EmbeddedResource>

@@ -70,6 +70,15 @@ namespace Company.VisualStudioHaskell {
         }
         
         /// <summary>
+        ///   Debug に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string DebugPropertyPageTitle {
+            get {
+                return ResourceManager.GetString("DebugPropertyPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   General に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string GeneralPropertyPageTitle {
